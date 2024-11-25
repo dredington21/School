@@ -4,9 +4,7 @@ const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    sessionStorage.removeItem("isAuthenticated");
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("userRole");
+    sessionStorage.clear();
     navigate("../login");
   };
   return (
