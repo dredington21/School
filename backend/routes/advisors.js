@@ -31,6 +31,17 @@ router.post('/advisors', (req, res) => {
       res.json(results[0]);
     });
   });
+  router.get('/advisors/department/:advisor_id', (req, res) => {
+    const { advisor_id } = req.params;
+    const query = 'SELECT department_id FROM advisors WHERE advisor_id = ?';
+    db.query(query, [advisor_id], (err, results) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.json(results[0]);
+    });
+  });
+
   router.put('/advisors/:advisor_id', (req, res) => {
     const { advisor_id } = req.params;
     const { first_name, last_name, department_id } = req.body;

@@ -12,8 +12,8 @@ app.use(express.json());
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'password',
-  database: 'School'
+  password: 'pass',
+  database: 'school'
 });
 
 db.connect((err) => {
@@ -87,6 +87,9 @@ app.use('/api', classinfoRoutes);
 
 const advisorsRoutes = require('./routes/advisors');
 app.use('/api', advisorsRoutes);
+
+const summariesRoutes = require('./routes/summaries');
+app.use('/api', summariesRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

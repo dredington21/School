@@ -4,10 +4,10 @@ import StudentIDSearch from "../StudentIDSearch";
 
 const WhatIf = () => {
   const userRole = sessionStorage.getItem("userRole");
-  const userID = "123"; // TODO: get user's id from database
+  const userID = sessionStorage.getItem("studentId");
 
   const [studentID, setStudentID] = useState(
-    userRole === "student" ? userID : "" // Set studentId value to the userId if user is a student
+    userRole === "Student" ? userID : "" // Set studentId value to the userId if user is a student
   );
 
   /**

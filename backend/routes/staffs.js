@@ -34,6 +34,17 @@ router.post('/staffs', (req, res) => {
     });
   });
 
+  router.get('/staffs/department/:staff_id', (req, res) => {
+    const { staff_id } = req.params;
+    const query = 'SELECT department_id FROM staffs WHERE staff_id = ?';
+    db.query(query, [staff_id], (err, results) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.json(results[0]);
+    });
+  });
+
   router.put('/staffs/:staff_id', (req, res) => {
     const { staff_id } = req.params;
     const { first_name, last_name, department_id } = req.body;
