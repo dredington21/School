@@ -75,7 +75,23 @@ const db = require('../db'); // Adjust the path to your database connection file
     });
   });
 
-
+  router.get('/summaries/studentRoster/:dept_id', (req, res) => {
+    const { dept_id } = req.params;
+    const query = `
+        SELECT m.major_name, s.student_id, s.first_name, s.last_name, s.GPA, s.total_credits
+        FROM students s 
+        JOIN majors m ON s.major_id = m.major_id
+        WHERE m.department_id = ?
+        GROUP BY m.major_name, s.student_id, s.first_name, s.last_name
+        ORDER BY m.major_name, total_credits DESC;
+    `;
+    db.query(query, [dept_id], (err, results) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      res.json(results);
+    });
+  });
 
 
   module.exports = router;
